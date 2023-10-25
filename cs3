@@ -1,0 +1,188 @@
+
+
+using System.Reflection.Emit;
+
+class Program
+{
+    static void Main()
+    {
+        //pirveli temperetura
+        
+        int temperature = 25;
+        string city = "Tbilisi"; // Replace with your city's name
+
+        for (int day = 1; day <= 7; day++)
+        {
+            Console.WriteLine($"Day {day}: In {city}, the temperature is {temperature}°F.");
+        }
+
+
+        //meore
+        // Create a Student object and provide a name and grade
+        Student student = new Student("akaki", "12");
+
+        // Call the Greeting method to display the student's greeting
+        Console.WriteLine(student.Greeting()); // Output: Hi, I'm John and I'm in grade 12.
+
+        //mesame
+        Triangle triangle = new Triangle();
+        triangle.Base = 5;
+        triangle.Height = 7;
+
+        Square square = new Square();
+        square.SideLength = 4;
+
+        Console.WriteLine($"Triangle Area: {triangle.CalculateArea()} square units");
+        Console.WriteLine($"Square Area: {square.CalculateArea()} square units");
+
+        //meotxe
+        Dog dog = new Dog();
+        Cat cat = new Cat();
+
+        // Call the "MakeSound" method for each object and print the results
+        Console.WriteLine("Dog: " + dog.MakeSound());  // Output: Dog sounds: Woof.
+        Console.WriteLine("Cat: " + cat.MakeSound());  // Output: Cat sounds: Meow.
+
+        //mexute
+        MyCollection<string> stringCollection = new MyCollection<string>();
+
+        // Add some items to the collection
+        stringCollection.AddItem("Item 1");
+        stringCollection.AddItem("Item 2");
+        stringCollection.AddItem("Item 3");
+
+        
+        // Get and print items by index
+        for (int i = 0; i < stringCollection.GetItemsCount(); i++)
+        {
+            string item = stringCollection.GetItem(i);
+            Console.WriteLine($"Item at index {i}: {item}");
+        }
+
+
+    }
+}
+class Student
+{
+    private string _studentName;
+
+    public string Grade { get; set; }
+
+    public Student(string studentName, string grade)
+    {
+        _studentName = studentName;
+        Grade = grade;
+    }
+
+    public string Greeting()
+    {
+        return $"Hi, I'm {_studentName} and I'm in grade {Grade}.";
+    }
+}
+
+//mesame class
+class Figure
+{
+    protected double Area { get; set; }
+
+    public Figure()
+    {
+        Area = 0;
+    }
+}
+
+class Triangle : Figure
+{
+    private double _base;
+    private double _height;
+
+    public double Base
+    {
+        get { return _base; }
+        set { _base = value; }
+    }
+
+    public double Height
+    {
+        get { return _height; }
+        set { _height = value; }
+    }
+
+    public double CalculateArea()
+    {
+        Area = (_base * _height) / 2;
+        return Area;
+    }
+}
+
+class Square : Figure
+{
+    private double _sideLength;
+
+    public double SideLength
+    {
+        get { return _sideLength; }
+        set { _sideLength = value; }
+    }
+
+    public double CalculateArea()
+    {
+        Area = _sideLength * _sideLength;
+        return Area;
+    }
+}
+
+//meotxe class
+public abstract class Animal
+{
+    // Define an abstract method "MakeSound"
+    public abstract string MakeSound();
+}
+
+// Create a class "Dog" which inherits from "Animal"
+public class Dog : Animal
+{
+    // Implement the "MakeSound" method
+    public override string MakeSound()
+    {
+        return "Woof.";
+    }
+}
+
+// Create a class "Cat" which inherits from "Animal"
+public class Cat : Animal
+{
+    // Implement the "MakeSound" method
+    public override string MakeSound()
+    {
+        return "Meow.";
+    }
+}
+
+//mexute class
+public class MyCollection<T>
+{
+    private List<T> items = new List<T>();
+
+    public void AddItem(T item)
+    {
+        items.Add(item);
+    }
+
+    public T GetItem(int index)
+    {
+        if (index >= 0 && index < items.Count)
+        {
+            return items[index];
+        }
+        else
+        {
+            throw new IndexOutOfRangeException("Index is out of range");
+        }
+    }
+
+    public int GetItemsCount()
+    {
+        return items.Count;
+    }
+}
